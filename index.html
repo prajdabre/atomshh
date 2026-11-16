@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ATOMSHH — 3D Periodic Table &amp; All 118 Elements Visualizer</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./node_modules/three/build/three.module.js",
+        "three/addons/": "./node_modules/three/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="app">
+    <!-- Top Navigation Header -->
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-orb" aria-hidden="true"></div>
+        <div class="brand-text">
+          <span class="brand-title">ATOMSHH</span>
+          <span class="brand-sub">3D Elements Studio</span>
+        </div>
+        <div id="active-element-pill" class="element-pill" title="Selected Element">
+          <span class="pill-z">#26</span>
+          <strong class="pill-sym">Fe</strong>
+          <span class="pill-name">Iron</span>
+        </div>
+      </div>
+
+      <nav class="mode-tabs" role="tablist" aria-label="3D Visualization Modes">
+        <button class="mode-tab" data-mode="table" role="tab" aria-selected="false">
+          <span class="tab-key">1</span> Periodic Table
+        </button>
+        <button class="mode-tab active" data-mode="bohr" role="tab" aria-selected="true">
+          <span class="tab-key">2</span> Bohr Atom
+        </button>
+        <button class="mode-tab" data-mode="orbital" role="tab" aria-selected="false">
+          <span class="tab-key">3</span> Quantum Orbitals
+        </button>
+        <button class="mode-tab" data-mode="crystal" role="tab" aria-selected="false">
+          <span class="tab-key">4</span> Crystal Lattice
+        </button>
+      </nav>
+
+      <div class="topbar-actions">
+        <div class="search-wrap">
+          <input
+            id="element-search"
+            type="search"
+            placeholder="Search name, symbol, or Z (/)"
+            autocomplete="off"
+            aria-label="Search elements"
+          />
+          <div id="search-results" class="search-results hidden" role="listbox"></div>
+        </div>
+
+        <div class="nav-arrows">
+          <button id="btn-prev-el" class="icon-btn" title="Previous Element (ArrowLeft)" aria-label="Previous Element">←</button>
+          <button id="btn-next-el" class="icon-btn" title="Next Element (ArrowRight)" aria-label="Next Element">→</button>
+        </div>
+
+        <button id="btn-autorotate" class="action-btn" title="Toggle Auto-Rotate">
+          Auto-Rotate
+        </button>
+        <button id="btn-reset-view" class="action-btn" title="Reset Camera View">
+          Reset View
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="workspace">
+      <div id="canvas-stage" class="canvas-stage">
+        <div id="webgl-container" class="webgl-container"></div>
+
+        <!-- Contextual 3D Mode Control Bar -->
+        <aside id="mode-controls" class="mode-controls" aria-label="3D Mode Controls"></aside>
+
+        <!-- 3D Hover Tooltip -->
+        <div id="hover-tooltip" class="hover-tooltip hidden"></div>
+
+        <!-- Subtle Navigation Hint -->
+        <div class="stage-hint">
+          Drag to orbit · Scroll to zoom · Right-drag to pan · Keys <code>1–4</code> switch views · <code>← / →</code> step elements
+        </div>
+
+        <!-- Collapsible Mini Periodic Table Dock -->
+        <section id="mini-table-dock" class="mini-table-dock collapsed" aria-label="Quick Element Selector">
+          <div class="mini-dock-header">
+            <span class="mini-dock-title">All 118 Elements Quick Selector</span>
+            <button id="btn-toggle-dock" class="mini-dock-toggle">Show Periodic Table ▲</button>
+          </div>
+          <div id="mini-table-grid" class="mini-table-grid"></div>
+        </section>
+      </div>
+
+      <!-- Right Element Inspector Sidebar -->
+      <aside id="inspector" class="inspector" aria-label="Element Inspector">
+        <div class="inspector-scroll">
+          <div id="inspector-hero" class="inspector-hero"></div>
+          <div id="inspector-quick-3d" class="inspector-quick-3d"></div>
+          <div id="inspector-shells" class="inspector-section"></div>
+          <div id="inspector-props" class="inspector-section"></div>
+          <div id="inspector-crystal" class="inspector-section"></div>
+          <div id="inspector-summary" class="inspector-section"></div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>

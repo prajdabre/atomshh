@@ -1,0 +1,13 @@
+{
+  "name": "atomshh-3d-periodic-table",
+  "version": "1.0.0",
+  "description": "Interactive 3D visualizations of all 118 elements in the periodic table",
+  "type": "module",
+  "scripts": {
+    "start": "python3 -m http.server 8080",
+    "validate": "node scripts/validate-elements.mjs"
+  },
+  "dependencies": {
+    "three": "^0.187.0"
+  }
+}
